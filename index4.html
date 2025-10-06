@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نقابات مملكة أريفانيا 🪽</title>
+  <link rel="icon" href="ايقونة.jpg" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f5f9fc;
+      color: #1b2a41;
+      transition: all 0.4s ease;
+    }
+
+    .dark-mode {
+      background-color: #0d1117;
+      color: #e6edf3;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+      background: linear-gradient(to bottom, #87ceeb 60%, #4682b4);
+      border-bottom: 3px solid #4682b4;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 0 10px #87ceeb;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.2em;
+      color: #f0f8ff;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .guild-card {
+      background-color: #ffffff;
+      border: 2px solid #87ceeb;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(135,206,235,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .guild-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 15px rgba(135,206,235,0.4);
+    }
+
+    .guild-name {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #1e3a5f;
+    }
+
+    .dark-mode .guild-name {
+      color: #60a5fa;
+    }
+
+    .guild-admiral {
+      font-size: 1em;
+      color: #444;
+      margin-top: 5px;
+    }
+
+    .dark-mode .guild-admiral {
+      color: #ccc;
+    }
+
+    .home-btn {
+      padding: 10px 18px;
+      background-color: #3b82f6;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      margin-top: 15px;
+    }
+
+    .home-btn:hover {
+      background-color: #2563eb;
+    }
+
+    .toggle-mode {
+      position: fixed;
+      top: 20px;
+      right: 20px; /* وضع الزر في الزاوية العلوية اليمنى */
+      padding: 10px 18px;
+      background-color: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1000;
+    }
+
+    .toggle-mode:hover {
+      background-color: #2563eb;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      border-top: 1px solid #ccc;
+      color: #555;
+      margin-top: 30px;
+    }
+
+    footer span {
+      color: #4682b4;
+      font-weight: bold;
+    }
+
+    .dark-mode footer {
+      border-top: 1px solid #374151;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>نقابات مملكة أريفانيا 🪽</h1>
+  <p>تضم مملكة أريفانيا مجموعة من النقابات المميزة يقودها أدميرالاتها بكل فخر وشرف.</p>
+  <a href="index.html" class="home-btn">
+    <i class="fas fa-home"></i> العودة للرئيسية
+  </a>
+</header>
+
+<button class="toggle-mode" onclick="toggleMode()" id="mode-toggle">
+  <i class="fas fa-moon"></i> وضع مظلم
+</button>
+
+<div class="container">
+  <div class="guild-card">
+    <p class="guild-name">ايـسـ🕷ـبـادا</p>
+    <p class="guild-admiral">ادميرال النقابه هو ايـتـاتـشـي 🕸</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">يــ🎴ــون</p>
+    <p class="guild-admiral">ادميرال النقابه هو ميـكـاسـا🌸</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">تـاكـ🔰ــومـي</p>
+    <p class="guild-admiral">ادميرال النقابه هو ريـــن🔥</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">ايــريـ⛈ـس</p>
+    <p class="guild-admiral">ادميرال النقابه هو لوسيوس⚖️</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">ازو🔥ـرا</p>
+    <p class="guild-admiral">ادميرال النقابه هو يــوتــا ⚜</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">رايـ⚡ــجـيـن</p>
+    <p class="guild-admiral">ادميرال النقابه هو شـانـكـس🕷</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">كـاتــ🗡ـسـورا</p>
+    <p class="guild-admiral">ادميرال النقابه هو تـوجـي🔱</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">ثـانـ🌪ــدر</p>
+    <p class="guild-admiral">ادميرال النقابه هو سـاكـامـوتـو🔮</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">ايـ👑ـنـرا</p>
+    <p class="guild-admiral">ادميرال النقابه هو شـــــاغــر</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">ســ🩸ـول</p>
+    <p class="guild-admiral">ادميرال النقابه هو مـيـسـا🪻</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">جــ🌫ـوديـن</p>
+    <p class="guild-admiral">ادميرال النقابه هو فـلـيـكـس🔮</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">وولــ🐺ـڤ</p>
+    <p class="guild-admiral">ادميرال النقابه هو ريــومــا🃏</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">فــوتـ🪐ـريـكـس</p>
+    <p class="guild-admiral">ادميرال النقابه هو سـوكـونـا 🌕</p>
+  </div>
+
+  <div class="guild-card">
+    <p class="guild-name">سـيـ❄ـنـا</p>
+    <p class="guild-admiral">ادميرال النقابه هو نـاغـومـو🌟</p>
+  </div>
+
+   <div class="guild-card">
+    <p class="guild-name">اريـ💧ـسـا
+    <p class="guild-admiral">ادميرال النقابه هو مـاكـيـمـا🎗️</p>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 <span>مملكة أريفانيا</span> - جميع الحقوق محفوظة 🪽
+</footer>
+
+<script>
+  function toggleMode() {
+    const body = document.body;
+    const icon = document.querySelector('#mode-toggle i');
+    const label = document.querySelector('#mode-toggle');
+
+    if (body.classList.contains("dark-mode")) {
+      body.classList.remove("dark-mode");
+      icon.className = "fas fa-moon";
+      label.innerHTML = '<i class="fas fa-moon"></i> وضع مظلم';
+    } else {
+      body.classList.add("dark-mode");
+      icon.className = "fas fa-sun";
+      label.innerHTML = '<i class="fas fa-sun"></i> وضع نهاري';
+    }
+  }
+</script>
+
+</body>
+</html>

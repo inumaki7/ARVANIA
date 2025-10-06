@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARVANIA KINGDOM</title>
+  <link rel="icon" href="ايقونة.jpg" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f5f9fc;
+      color: #1b2a41;
+      transition: all 0.4s ease;
+    }
+
+    .dark-mode {
+      background-color: #0d1117;
+      color: #e6edf3;
+    }
+
+    .dark-mode header {
+      background: linear-gradient(to bottom, #1f2a37 60%, #111827);
+      border-bottom: 2px solid #374151;
+    }
+
+    .dark-mode .rank-card {
+      background-color: #1f2937;
+      border-color: #3b82f6;
+      color: #f9fafb;
+    }
+
+    .dark-mode footer {
+      border-top: 1px solid #374151;
+      color: #9ca3af;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+      background: linear-gradient(to bottom, #87ceeb 60%, #4682b4);
+      border-bottom: 3px solid #4682b4;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 0 10px #87ceeb;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.2em;
+      color: #f0f8ff;
+    }
+
+    .main-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #3b82f6;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+      margin: 10px;
+      font-size: 1em;
+    }
+
+    .main-button:hover {
+      background-color: #2563eb;
+      transform: scale(1.05);
+    }
+
+    .toggle-mode {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 18px;
+      background-color: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1000;
+    }
+
+    .toggle-mode:hover {
+      background-color: #2563eb;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .section {
+      margin-bottom: 50px;
+    }
+
+    .section h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #1e3a5f;
+    }
+
+    .dark-mode .section h2 {
+      color: #60a5fa;
+    }
+
+    .ranks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .rank-card {
+      background-color: #ffffff;
+      border: 2px solid #87ceeb;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.05em;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(135, 206, 235, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .rank-card img {
+      width: 100%;
+      height: 200px;
+      max-width: 350px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .rank-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(135, 206, 235, 0.4);
+    }
+
+    .rank-desc {
+      font-size: 0.9em;
+      font-weight: normal;
+      color: #555;
+    }
+
+    .dark-mode .rank-desc {
+      color: #bbb;
+    }
+
+    .rank-more {
+      display: none;
+      margin-top: 8px;
+      font-size: 0.85em;
+      color: #666;
+    }
+
+    .dark-mode .rank-more {
+      color: #aaa;
+    }
+
+    .show-more-btn {
+      margin-top: 10px;
+      display: inline-block;
+      background-color: transparent;
+      border: 1px solid #3b82f6;
+      color: #3b82f6;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85em;
+      transition: 0.3s;
+    }
+
+    .show-more-btn:hover {
+      background-color: #3b82f6;
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      border-top: 1px solid #ccc;
+      margin-top: 30px;
+      color: #555;
+    }
+
+    footer span {
+      color: #4682b4;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>مملكة أريفانيا</h1>
+  <p>مملكة ايرفانيا هي منصة اجتماعية تفاعلية تأسست في سبتمبر 2025، مبنية على تطبيق واتساب، وتجمع أكثر من 15 نقابة أنمي وأعضاء من مختلف البلدان العربية. تهدف المملكة إلى توفير بيئة تجمع محبي الأنمي والثقافة العربية للتعارف، تبادل الأفكار، وتنظيم الفعاليات التفاعلية بين الأعضاء والنقابات. أسس المملكة كرولو ويشرف على إدارتها فريق مكون من أكثر من250 مشرفًا، لضمان تنظيم النقابات وتحفيز التفاعل ضمن مجتمع واسع ومتنامي</p>
+
+  <div style="margin-top: 20px;">
+    <a href="index4.html" class="main-button">صفحة النقابات</a>
+    <a href="index5.html" class="main-button">صفحة الإنجازات</a>
+    <a href="index2.html" class="main-button">صفحة القوانين</a>
+    <a href="index3.html" class="main-button">صفحة التصنيفات</a>
+  </div>
+</header>
+
+<button class="toggle-mode" onclick="toggleMode()" id="mode-toggle">
+  <i class="fas fa-moon"></i> وضع مظلم
+</button>
+
+<div class="container">
+
+  <!-- الادارة العليا -->
+  <div class="section">
+    <h2>الادارة العليا</h2>
+    <div class="ranks-grid">
+      <div class="rank-card">
+        <img src="كرولو.jpg" alt="كرولو"> 
+        <p class="rank-desc">{كرولو}</p>
+        <p class="rank-more">مؤسس جميع النقابات والمسؤول عن جميع الأشياء الخاصة بالمملكة , و مسؤول جميع النقابات , و هو المسؤول عن انشاء النقابات و فروعها</p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+      <div class="rank-card">
+        <img src="اريما.jpg" alt="اريما">
+        <p class="rank-desc">{اريما}</p>
+        <p class="rank-more">المساعد الاول للمؤوس وهو المسؤول الثاني بالمملكة ومسؤول الزيارات الخاصة بالمملكة</p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+      <div class="rank-card">
+        <img src="شادو.jpg" alt="شادو">
+        <p class="rank-desc">{شادو}</p>
+        <p class="rank-more">المسؤول عن الفروع بصفة عامة ،فتح فروع وتنظيم الفروع على اكمل وجه</p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- الدوقات -->
+  <div class="section">
+    <h2>الدوقات</h2>
+    <div class="ranks-grid">
+      <div class="rank-card"><img src="موزان.jpg"> 
+        <p class="rank-desc">❐ موزان</p>
+        <p class="rank-more">هو مسؤول عن النقابات التالية:<br>{رايجين⚡}{ازورا🔥}</p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+      <div class="rank-card"><img src="كانيكي.jpg"> 
+        <p class="rank-desc">❐ كانيكي</p>
+        <p class="rank-more">هو مسؤول عن النقابات التالية: <br>{فوتريكس🪐}{سول🩸}</p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+      <div class="rank-card"><img src="كورابيكا.jpg"> 
+        <p class="rank-desc">❐ كورابيكا</p>
+        <p class="rank-more">هو مسؤول عن النقابات التالية: <br> {ايريس⛈}{كاتسورا🗡}</p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+      <div class="rank-card"><img src="اكي.jpg"> 
+        <p class="rank-desc">❐ اكي</p>
+        <p class="rank-more">هو مسؤول عن النقابات التالية: <br>{ايسبادا🕷}{ثاندر🌪}{تاكومي🔰}</p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+      <div class="rank-card"><img src="اليا.jpg"> 
+        <p class="rank-desc">❐ اليا</p>
+        <p class="rank-more">هي مسؤولة عن النقابات التالية: <br> {سينا❄}{اينرا👑}</p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- الرتب الخاصة -->
+  <div class="section">
+    <h2>رتب خاصة</h2>
+    <div class="ranks-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+      
+      <div class="rank-card" style="padding: 8px; font-size: 0.85em;">
+        <img src="كانيكي المعتزل.jpg" alt="كانيكي المعتزل">
+        <p class="rank-desc">{كانيكي}</p>
+        <p class="rank-more">تم تخصيص هذه الرتبة تقديراً ل اللورد العزيز {كانيكي} الذي اعتزل منذ فترة وجيزة</p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+      
+      <div class="rank-card" style="padding: 8px; font-size: 0.85em;">
+        <img src="اينوماكي المعتزل.jpg" alt="اينوماكي">
+        <p class="rank-desc">{اينوماكي}</p>
+        <p class="rank-more">تم وضع اينوماكي في هذا المنصب لأنه اعتزل بعد ان تفككت المملكة الأم {ماستر} </p>
+        <button class="show-more-btn" onclick="toggleMore(this)">عرض المزيد</button>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2025 <span>مملكة أريفانيا</span> - جميع الحقوق محفوظة
+</footer>
+
+<script>
+  function toggleMode() {
+    const body = document.body;
+    const icon = document.querySelector('#mode-toggle i');
+    const label = document.querySelector('#mode-toggle');
+
+    if (body.classList.contains("dark-mode")) {
+      body.classList.remove("dark-mode");
+      icon.className = "fas fa-moon";
+      label.innerHTML = '<i class="fas fa-moon"></i> وضع مظلم';
+    } else {
+      body.classList.add("dark-mode");
+      icon.className = "fas fa-sun";
+      label.innerHTML = '<i class="fas fa-sun"></i> وضع نهاري';
+    }
+  }
+
+  function toggleMore(btn) {
+    const moreText = btn.previousElementSibling;
+    if (moreText.style.display === "none" || moreText.style.display === "") {
+      moreText.style.display = "block";
+      btn.textContent = "إخفاء التفاصيل";
+    } else {
+      moreText.style.display = "none";
+      btn.textContent = "عرض المزيد";
+    }
+  }
+</script>
+
+</body>
+</html>
