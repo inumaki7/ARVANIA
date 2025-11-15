@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>متجر مملكة أريفانيا</title>
+    <link rel="icon" href="ايقونة.jpg" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f5f9fc;
+      color: #1b2a41;
+      transition: all 0.4s ease;
+    }
+
+    body.dark-mode {
+      background-color: #0d1117;
+      color: #e6edf3;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+      background: linear-gradient(to bottom, #87ceeb 60%, #4682b4);
+      border-bottom: 3px solid #4682b4;
+    }
+
+    body.dark-mode header {
+      background: linear-gradient(to bottom, #1f2a37 60%, #111827);
+      border-bottom: 2px solid #374151;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 0 10px #87ceeb;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: #f0f8ff;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    body.dark-mode header p {
+      color: #d1d5db;
+    }
+
+    .header-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .header-btn {
+      padding: 10px 20px;
+      background-color: #3b82f6;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .header-btn:hover {
+      background-color: #2563eb;
+      transform: scale(1.05);
+    }
+
+    /* Toggle Dark Mode Button */
+    .toggle-mode {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      padding: 10px 18px;
+      background-color: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1em;
+    }
+
+    .toggle-mode:hover {
+      background-color: #2563eb;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    /* Currency Section */
+    .currency-section {
+      margin-bottom: 40px;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: #ffffff;
+      border: 2px solid #87ceeb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    body.dark-mode .currency-section {
+      background-color: #1f2937;
+      border-color: #3b82f6;
+    }
+
+    .currency-info h2 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      color: #1e3a5f;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    body.dark-mode .currency-info h2 {
+      color: #60a5fa;
+    }
+
+    .currency-info p {
+      color: #555;
+      font-size: 0.95em;
+    }
+
+    body.dark-mode .currency-info p {
+      color: #bbb;
+    }
+
+    .currency-help-btn {
+      padding: 12px;
+      border-radius: 50%;
+      background-color: #e0f2fe;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5em;
+      transition: all 0.3s;
+      color: #0369a1;
+    }
+
+    body.dark-mode .currency-help-btn {
+      background-color: #1e3a5f;
+      color: #fbbf24;
+    }
+
+    .currency-help-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Products Section */
+    .products-section h2 {
+      font-size: 2.2em;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #1e3a5f;
+    }
+
+    body.dark-mode .products-section h2 {
+      color: #60a5fa;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border: 2px solid #87ceeb;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(135, 206, 235, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .product-card {
+      background-color: #1f2937;
+      border-color: #3b82f6;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(135, 206, 235, 0.4);
+    }
+
+    .product-image {
+      font-size: 4em;
+      margin-bottom: 15px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-name {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #1e3a5f;
+    }
+
+    body.dark-mode .product-name {
+      color: #f9fafb;
+    }
+
+    .product-description {
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    body.dark-mode .product-description {
+      color: #bbb;
+    }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #d97706;
+    }
+
+    .buy-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #22c55e, #16a34a);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1em;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .buy-btn:hover {
+      background: linear-gradient(to right, #16a34a, #15803d);
+      transform: scale(1.02);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background-color: #ffffff;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 70vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s;
+    }
+
+    body.dark-mode .modal-content {
+      background-color: #1f2937;
+      color: #f9fafb;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #1e3a5f;
+    }
+
+    body.dark-mode .modal-header {
+      color: #60a5fa;
+    }
+
+    .modal-close {
+      float: left;
+      font-size: 2em;
+      font-weight: bold;
+      cursor: pointer;
+      color: #999;
+      transition: 0.3s;
+    }
+
+    .modal-close:hover {
+      color: #000;
+    }
+
+    body.dark-mode .modal-close:hover {
+      color: #fff;
+    }
+
+    .modal-section {
+      margin-bottom: 15px;
+    }
+
+    .modal-section h3 {
+      font-size: 1em;
+      margin-bottom: 8px;
+      color: #1e3a5f;
+    }
+
+    body.dark-mode .modal-section h3 {
+      color: #60a5fa;
+    }
+
+    .modal-section p, .modal-section li {
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 6px;
+      font-size: 0.95em;
+    }
+
+    body.dark-mode .modal-section p,
+    body.dark-mode .modal-section li {
+      color: #bbb;
+    }
+
+    .modal-section ul {
+      margin-right: 20px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .modal-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.9em;
+      transition: 0.3s;
+    }
+
+    .modal-btn-close {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    .modal-btn-close:hover {
+      background-color: #2563eb;
+    }
+
+    .modal-btn-contact {
+      background-color: #22c55e;
+      color: white;
+    }
+
+    .modal-btn-contact:hover {
+      background-color: #16a34a;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95em;
+      border-top: 1px solid #ccc;
+      margin-top: 40px;
+      color: #555;
+    }
+
+    body.dark-mode footer {
+      border-top: 1px solid #374151;
+      color: #9ca3af;
+    }
+
+    footer span {
+      color: #4682b4;
+      font-weight: bold;
+    }
+    body.dark-mode footer span {
+      color: #60a5fa;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8em;
+      }
+
+      header p {
+        font-size: 0.95em;
+      }
+
+      .header-buttons {
+        gap: 8px;
+      }
+
+      .header-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .currency-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .currency-info h2 {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<button class="toggle-mode" onclick="toggleDarkMode()">
+  <i class="fas fa-moon"></i> <span id="mode-text">وضع مظلم</span>
+</button>
+
+<header>
+  <h1> متجر مملكة أريفانيا🪽</h1>
+  <p>مرحبًا بك في متجر المملكة الرسمي! هنا تستطيع شراء الرتب الخاصة، العناصر النادرة، والميزات الحصرية لتعزيز تجربتك في مملكة أريفانيا.</p>
+  <div class="header-buttons">
+    <button class="header-btn">الصفحة الرئيسية</button>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Currency Section -->
+    <div class="currency-section">
+      <div class="currency-info">
+        <h2>💰 عملة أري</h2>
+        <p>العملة الرسمية لمملكة أريفانيا - استخدمها لشراء الرتب والخدمات والميزات الحصرية</p>
+      </div>
+      <button class="currency-help-btn" onclick="openCurrencyModal()" title="معلومات عن العملة">❓</button>
+    </div>
+
+  <!-- Products Section -->
+  <div class="products-section">
+    <h2>🛍️ المنتجات المتاحة</h2>
+    <div class="products-grid" id="products-grid">
+      <!-- Products will be inserted here by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- Currency Info Modal -->
+<div id="currencyModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeCurrencyModal()">&times;</span>
+    
+    <div class="modal-header">
+      <span>💰</span>
+      <span>عملة أري</span>
+    </div>
+
+    <div class="modal-section">
+      <h3>❓ ما هي عملة أري؟</h3>
+      <p>عملة أري هي العملة الرسمية لمملكة أريفانيا. تُستخدم لشراء الرتب والخدمات والميزات الحصرية. كما قال المذيع: "عضوية VIP توفر إمكانيات ومناصب أكثر وقابلية لزيارة نقابتين من مملكة أخرى".</p>
+    </div>
+
+    <div class="modal-section">
+      <h3>🎁 كيف تحصل على عملة أري؟</h3>
+      <ul>
+        <li>تحصيل الأري عبر أنشطة ملكية تفاعلية</li>
+        <li>مشاركة في البطولات والمسابقات الملكية</li>
+        <li>مرتب لمناصب مختلفة مثل رئيس الأركان والمشرفين ومحاسب المملكة</li>
+        <li>مهام والغاز ملكية - تسريبات ملكية لفترة خاصة يفوز بها أسرع المشرفين</li>
+        <li>راتب تصنيف النقابة - يستلم الأدميرال كل أسبوع راتب يتم توزيعه على مشرفي النقابة</li>
+      </ul>
+    </div>
+
+    <div class="modal-section">
+      <h3>🛍️ ماذا تستطيع أن تشتري بها؟</h3>
+      <ul>
+        <li>بطاقة هوية ملكية - "قابلية زيارة مملكة ثانية كل أسبوع ببطاقتك"</li>
+        <li>إعلان خاص نقابتك - "قابلية إعلان نقابتك بأي وقت"</li>
+        <li>شراء فرع خاص - "إنشاء فرع خاص بك باسمك"</li>
+        <li>نقل - "نقل لنقابة من اختيارك"</li>
+        <li>لقاء تلفازي - "لقاء مع المذيع مناقشًا أهم أخبار الأسبوع"</li>
+        <li>عضوية VIP - "إمكانيات ومناصب أكثر"</li>
+      </ul>
+    </div>
+
+    <div class="modal-section">
+      <h3>⚠️ ملاحظات مهمة</h3>
+      <p>العملة الملكية غير قابلة للاسترجاع بعد الشراء. تأكد من اختيارك قبل الشراء. للمساعدة أو الاستفسارات، تواصل مع فريق الإدارة عبر مجموعة الواتساب.</p>
+    </div>
+
+    <div class="modal-buttons">
+      <button class="modal-btn modal-btn-close" onclick="closeCurrencyModal()">فهمت</button>
+      <button class="modal-btn modal-btn-contact" onclick="contactWhatsApp()">تواصل معنا</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 <span>مملكة أريفانيا</span> - جميع الحقوق محفوظة
+</footer>
+
+<script>
+  const WHATSAPP_LINK = "https://chat.whatsapp.com/e9R0LT1pWA31ogkAwsflk6";
+
+  const products = [
+    {
+      id: 1,
+      name: "بطاقة هوية ملكية",
+      description: "قابلية زيارة مملكة ثانية كل أسبوع ببطاقتك، تعريف لرتبتك ونقابتك ولقبك - هويتك الإلكترونية الملكية!",
+      price: 25,
+      image: "🆔"
+    },
+    {
+      id: 2,
+      name: "إعلان خاص نقابتك",
+      description: "قابلية إعلان نقابتك بأي وقت! حد أقصى لا إعلانات خاصة لنقابتك 2 باليوم",
+      price: 15,
+      image: "📢"
+    },
+    {
+      id: 3,
+      name: "شراء فرع خاص",
+      description: "إنشاء فرع خاص بك باسمك - افتارات/ملصقات فرع تحت ملكيتك + مسموح لك تقديم طلب تحويل الفرع لقاعة عيد ميلاد",
+      price: 60,
+      image: "🏪"
+    },
+    {
+      id: 4,
+      name: "نقل",
+      description: "نقل لنقابة من اختيارك - مسموحة كل تصنيفين",
+      price: 20,
+      image: "🚚"
+    },
+    {
+      id: 5,
+      name: "لقاء تلفازي",
+      description: "لقاء مع المذيع مناقشًا أهم أخبار الأسبوع (يشترى مرة كل قرن)",
+      price: 20,
+      image: "📺"
+    },
+    {
+      id: 6,
+      name: "عضوية VIP الملكية",
+      description: "إمكانيات ومناصب أكثر - قابلية لزيارة نقابتين من مملكة أخرى + كود سري لدخول فرع VIP للتسريبات",
+      price: 70,
+      image: "👑"
+    },
+    {
+      id: 7,
+      name: "اسمك جنب نقابتك",
+      description: "اسمك جنب نقابتك لمدة يوم (لا يسمح بالاستهلاك الكثير)",
+      price: 15,
+      image: "✨"
+    },
+    {
+      id: 8,
+      name: "شراء نقابة خارج وقت الفتح",
+      description: "شراء نقابة خارج وقت الفتح (يشترى مرة واحدة فقط)",
+      price: 40,
+      image: "🔓"
+    },
+    {
+      id: 9,
+      name: "عضوية اقتصادية",
+      description: "إمكانية زيارة نقابتين + جائزة مالية كل أسبوعين (5 أري) - سلعة قيد التطوير",
+      price: 30,
+      image: "💰"
+    },
+    {
+      id: 10,
+      name: "حذف مؤبد غير مشدد",
+      description: "خدمة حذف مؤبد غير مشدد - قيد التطوير",
+      price: 0,
+      image: "🔄"
+    }
+  ];
+
+  // Initialize products on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    renderProducts();
+    // Check for saved dark mode preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      updateModeButton();
+    }
+  });
+
+  function renderProducts() {
+    const grid = document.getElementById('products-grid');
+    grid.innerHTML = products.map(product => `
+      <div class="product-card">
+        <div class="product-image">${product.image}</div>
+        <div class="product-name">${product.name}</div>
+        <div class="product-description">${product.description}</div>
+        <div class="product-price">
+          <span>${product.price}</span>
+          <span>💰</span>
+        </div>
+        <button class="buy-btn" onclick="buyProduct('${product.name}')">
+          🛒 شراء الآن
+        </button>
+      </div>
+    `).join('');
+  }
+
+  function buyProduct(productName) {
+    window.open(WHATSAPP_LINK, '_blank');
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    updateModeButton();
+  }
+
+  function updateModeButton() {
+    const btn = document.querySelector('.toggle-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    const icon = isDark ? 'fa-sun' : 'fa-moon';
+    const text = isDark ? 'وضع نهاري' : 'وضع مظلم';
+    btn.innerHTML = `<i class="fas ${icon}"></i> <span id="mode-text">${text}</span>`;
+  }
+
+  function openCurrencyModal() {
+    document.getElementById('currencyModal').style.display = 'block';
+  }
+
+  function closeCurrencyModal() {
+    document.getElementById('currencyModal').style.display = 'none';
+  }
+
+  function contactWhatsApp() {
+    window.open(WHATSAPP_LINK, '_blank');
+  }
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    const modal = document.getElementById('currencyModal');
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>
