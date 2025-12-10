@@ -8,12 +8,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    body {
+    :root {
+      --primary: #87ceeb;
+      --primary-2: #4682b4;
+      --text: #1b2a41;
+      --bg: #f5f9fc;
+    }
+
+    html, body {
+      height: 100%;
       margin: 0;
+      padding: 0;
       font-family: 'Tajawal', sans-serif;
-      background-color: #f5f9fc;
-      color: #1b2a41;
+      background-color: var(--bg);
+      color: var(--text);
       transition: all 0.4s ease;
+      overflow-y: auto;   /* ⬅️ التعديل */
+      overflow-x: hidden; /* ⬅️ التعديل */
     }
 
     .dark-mode {
@@ -25,8 +36,9 @@
       text-align: center;
       padding: 50px 20px 30px;
       background: linear-gradient(to bottom, #87ceeb 60%, #4682b4);
-      border-bottom: 3px solid #4682b4;
+      border-bottom: 3px solid var(--primary-2);
       position: relative;
+      z-index: 3;
     }
 
     header h1 {
@@ -44,16 +56,18 @@
 
     .container {
       max-width: 1100px;
-      margin: auto;
+      margin: 30px auto;
       padding: 40px 20px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
+      position: relative;
+      z-index: 3;
     }
 
     .guild-card {
       background-color: #ffffff;
-      border: 2px solid #87ceeb;
+      border: 2px solid var(--primary);
       border-radius: 12px;
       padding: 15px;
       text-align: center;
@@ -72,18 +86,10 @@
       color: #1e3a5f;
     }
 
-    .dark-mode .guild-name {
-      color: #60a5fa;
-    }
-
     .guild-admiral {
       font-size: 1em;
       color: #444;
       margin-top: 5px;
-    }
-
-    .dark-mode .guild-admiral {
-      color: #ccc;
     }
 
     .home-btn {
@@ -96,19 +102,15 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       transition: all 0.3s ease;
       margin-top: 15px;
-    }
-
-    .home-btn:hover {
-      background-color: #2563eb;
+      z-index: 3;
     }
 
     .toggle-mode {
       position: fixed;
       top: 20px;
-      right: 20px; /* وضع الزر في الزاوية العلوية اليمنى */
+      right: 20px;
       padding: 10px 18px;
       background-color: #3b82f6;
       color: #fff;
@@ -116,35 +118,42 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
+      gap: 8px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      z-index: 1000;
+      z-index: 1001;
     }
 
-    .toggle-mode:hover {
-      background-color: #2563eb;
+    .emoji {
+      position: absolute;
+      opacity: 0.95;
+      pointer-events: none;
+      user-select: none;
+      animation: floatRandom linear forwards;
+      width: var(--size);
+      height: var(--size);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
     }
 
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-      border-top: 1px solid #ccc;
-      color: #555;
-      margin-top: 30px;
+    .emoji img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
-    footer span {
-      color: #4682b4;
-      font-weight: bold;
-    }
-
-    .dark-mode footer {
-      border-top: 1px solid #374151;
-      color: #9ca3af;
+    @keyframes floatRandom {
+      from {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translate(var(--tx), var(--ty)) scale(1.2);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -153,7 +162,7 @@
 <header>
   <h1>نقابات مملكة أريفانيا 🪽</h1>
   <p>تضم مملكة أريفانيا مجموعة من النقابات المميزة يقودها أدميرالاتها بكل فخر وشرف.</p>
-  <a href="index.html" class="home-btn">
+  <a href="#" class="home-btn">
     <i class="fas fa-home"></i> العودة للرئيسية
   </a>
 </header>
@@ -162,105 +171,34 @@
   <i class="fas fa-moon"></i> وضع مظلم
 </button>
 
-<div class="container">
-  <div class="guild-card">
-    <p class="guild-name">ايـسـ🕷ـبـادا</p>
-    <p class="guild-admiral">ادميرال النقابه هو لفياي 🕸</p>
-  </div>
+<div class="container" id="guild-container">
 
-  <div class="guild-card">
-    <p class="guild-name">يــ🎴ــون</p>
-    <p class="guild-admiral">  نائب لورد ⚔️</p>
-  </div>
+  <!-- 🔥 كل النقابات كما هي بالضبط من الكود السابق 🔥 -->
+  <div class="guild-card"><p class="guild-name">ايـسـ🕷ـبـادا</p><p class="guild-admiral">ادميرال النقابه هو لفياي 🕸</p></div>
+  <div class="guild-card"><p class="guild-name">يــ🎴ــون</p><p class="guild-admiral">ادميرال النقابه شاغر 🍁</p></div>
+  <div class="guild-card"><p class="guild-name">تـاكـ🔰ــومـي</p><p class="guild-admiral">ادميرال النقابه شاغر🍁</p></div>
+  <div class="guild-card"><p class="guild-name">ايــريـ⛈ـس</p><p class="guild-admiral">نائب لورد ⚖️</p></div>
+  <div class="guild-card"><p class="guild-name">ازو🔥ـرا</p><p class="guild-admiral">ادميرال النقابه شاغر🍁</p></div>
+  <div class="guild-card"><p class="guild-name">رايـ⚡ــجـيـن</p><p class="guild-admiral">ادميرال النقابه هو راي🪄</p></div>
+  <div class="guild-card"><p class="guild-name">كـاتــ🗡ـسـورا</p><p class="guild-admiral">ادميرال النقابه شاغر 🍁</p></div>
+  <div class="guild-card"><p class="guild-name">ثـانـ🌪ــدر</p><p class="guild-admiral">ادميرال النقابه هو شوكو🔮</p></div>
+  <div class="guild-card"><p class="guild-name">ايـ👑ـنـرا</p><p class="guild-admiral">ادميرال النقابه شاغر 🍁</p></div>
+  <div class="guild-card"><p class="guild-name">ســ🩸ـول</p><p class="guild-admiral">ادميرالة النقابه شاغر 🍁</p></div>
+  <div class="guild-card"><p class="guild-name">جــ🌫ـوديـن</p><p class="guild-admiral">ادميرال النقابه هو ويليام🔮</p></div>
+  <div class="guild-card"><p class="guild-name">وولــ🐺ـڤ</p><p class="guild-admiral">ادميرالة النقابه هي شوكو🦪</p></div>
+  <div class="guild-card"><p class="guild-name">فــوتـ🪐ـريـكـس</p><p class="guild-admiral">ادميرال النقابه كيلوا 🌕</p></div>
+  <div class="guild-card"><p class="guild-name">سـيـ❄ـنـا</p><p class="guild-admiral">ادميرالة النقابه هي نامي ⭐</p></div>
+  <div class="guild-card"><p class="guild-name">اريـ💧ـسـا</p><p class="guild-admiral">ادميرالة النقابه هي جولين 🎗️</p></div>
+  <div class="guild-card"><p class="guild-name">درفـ🎻ـت</p><p class="guild-admiral">ادميرال النقابه هو جو🌟</p></div>
+  <div class="guild-card"><p class="guild-name">مـاجـيـ🔮ـك</p><p class="guild-admiral">ادميرال النقابه هو كيرا🪶</p></div>
+  <div class="guild-card"><p class="guild-name">مـاسـ🌟ـتـر</p><p class="guild-admiral">ادميرال النقابه هو اكاشي🌙</p></div>
+  <div class="guild-card"><p class="guild-name">مارلي🌙</p><p class="guild-admiral">ادميرال النقابه شاعر🍁</p></div>
+  <div class="guild-card"><p class="guild-name">لونا🌕</p><p class="guild-admiral">ادميرال النقابه هو تاكاناشي🥀</p></div>
+  <div class="guild-card"><p class="guild-name">سيلينا🌒</p><p class="guild-admiral">ادميرال النقابه شاغر 🍁</p></div>
+  <div class="guild-card"><p class="guild-name">ون بيس 🏴‍☠️</p><p class="guild-admiral">ادميرالة النقابه هي ميتاكا 🎀</p></div>
+  <div class="guild-card"><p class="guild-name">كورفا🐍</p><p class="guild-admiral">ادميرال النقابه هو اكاي🎭</p></div>
+  <div class="guild-card"><p class="guild-name">فينوس🔆</p><p class="guild-admiral">ادميرال النقابه هو اكازا🌋</p></div>
 
-  <div class="guild-card">
-    <p class="guild-name">تـاكـ🔰ــومـي</p>
-    <p class="guild-admiral">ادميرال النقابه شاغر🔥</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">ايــريـ⛈ـس</p>
-    <p class="guild-admiral">  نائب لورد ⚖️</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">ازو🔥ـرا</p>
-    <p class="guild-admiral">ادميرال النقابه هو يــوتــا ⚜</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">رايـ⚡ــجـيـن</p>
-    <p class="guild-admiral">ادميرال النقابه هو راي🪄</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">كـاتــ🗡ـسـورا</p>
-    <p class="guild-admiral">ادميرال النقابه هي كـانـاي🔱</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">ثـانـ🌪ــدر</p>
-    <p class="guild-admiral">ادميرال النقابه هو شوكو🔮</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">ايـ👑ـنـرا</p>
-    <p class="guild-admiral">ادميرال النقابه هو ايغريس🧭</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">ســ🩸ـول</p>
-    <p class="guild-admiral">ادميرالة النقابه هي ساي🪻</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">جــ🌫ـوديـن</p>
-    <p class="guild-admiral">ادميرال النقابه هو ويليام🔮</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">وولــ🐺ـڤ</p>
-    <p class="guild-admiral">  نائب لورد 🃏</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">فــوتـ🪐ـريـكـس</p>
-    <p class="guild-admiral">ادميرال النقابه كيلوا 🌕</p>
-  </div>
-
-  <div class="guild-card">
-    <p class="guild-name">سـيـ❄ـنـا</p>
-    <p class="guild-admiral">  نائب لورد 🌟</p>
-  </div>
-
-   <div class="guild-card">
-    <p class="guild-name">اريـ💧ـسـا
-    <p class="guild-admiral">ادميرال النقابه ايتاشي 🎗️</p>
-  </div>
-  <div class="guild-card">
-    <p class="guild-name">درفـ🎻ـت</p>
-    <p class="guild-admiral">ادميرال النقابه هي ساكاموتو🌟</p>
-  </div>
-   <div class="guild-card">
-    <p class="guild-name">مـاجـيـ🔮ـك</p>
-    <p class="guild-admiral">ادميرال النقابه هو كيرا🪶</p>
-  </div>
-   <div class="guild-card">
-    <p class="guild-name">مـاسـ🌟ـتـر</p>
-    <p class="guild-admiral">ادميرال النقابه هي اريسو🌙</p>
-  </div>
-    <div class="guild-card">
-    <p class="guild-name">مارلي🌙</p>
-    <p class="guild-admiral">ادميرال النقابه شاعر⚓</p>
-  </div>
-    <div class="guild-card">
-    <p class="guild-name">لونا🌕</p>
-    <p class="guild-admiral">ادميرال النقابه هو كيرا🎭</p>
-  </div>
-    <div class="guild-card">
-    <p class="guild-name">سيلينا🌒</p>
-    <p class="guild-admiral">ادميرال النقابه هو غيو🌊</p>
-  </div>
 </div>
 
 <footer>
@@ -268,21 +206,81 @@
 </footer>
 
 <script>
-  function toggleMode() {
-    const body = document.body;
-    const icon = document.querySelector('#mode-toggle i');
-    const label = document.querySelector('#mode-toggle');
+function toggleMode() {
+  const body = document.body;
+  const icon = document.querySelector('#mode-toggle i');
+  const label = document.querySelector('#mode-toggle');
 
-    if (body.classList.contains("dark-mode")) {
-      body.classList.remove("dark-mode");
-      icon.className = "fas fa-moon";
-      label.innerHTML = '<i class="fas fa-moon"></i> وضع مظلم';
-    } else {
-      body.classList.add("dark-mode");
-      icon.className = "fas fa-sun";
-      label.innerHTML = '<i class="fas fa-sun"></i> وضع نهاري';
-    }
+  if (body.classList.contains("dark-mode")) {
+    body.classList.remove("dark-mode");
+    icon.className = "fas fa-moon";
+    label.innerHTML = '<i class="fas fa-moon"></i> وضع مظلم';
+  } else {
+    body.classList.add("dark-mode");
+    icon.className = "fas fa-sun";
+    label.innerHTML = '<i class="fas fa-sun"></i> وضع نهاري';
   }
+}
+
+const emojiHexCodes = [
+  "2666-fe0f","1f3b4","1f530","26c8-fe0f","1f525",
+  "26a1-fe0f","1f32a","1f451","1fa78","1f32b",
+  "1f43a","1fa90","2744-fe0f","1f4a7","1f3bb",
+  "1f52e","1f31f","1f319","1f315","1f312",
+  "1f3f4-200d-2620-fe0f"
+];
+
+const CDN_URLS = [
+  "https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/",
+  "https://cdnjs.cloudflare.com/ajax/libs/emoji-datasource-apple/15.1.2/img/apple/64/",
+  "https://unpkg.com/emoji-datasource-apple@15.1.2/img/apple/64/"
+];
+
+let currentCDNIndex = 0;
+
+function getEmojiUrl(hexCode) {
+  return CDN_URLS[currentCDNIndex] + hexCode + ".png";
+}
+
+function spawnEmoji() {
+  const emojiContainer = document.createElement("div");
+  emojiContainer.className = "emoji";
+
+  const emojiImage = document.createElement("img");
+  const hexCode = emojiHexCodes[Math.floor(Math.random() * emojiHexCodes.length)];
+  emojiImage.src = getEmojiUrl(hexCode);
+
+  emojiImage.onerror = function() {
+    if (currentCDNIndex < CDN_URLS.length - 1) {
+      currentCDNIndex++;
+      emojiImage.src = getEmojiUrl(hexCode);
+    } else {
+      emojiContainer.remove();
+    }
+  };
+
+  emojiContainer.appendChild(emojiImage);
+
+  emojiContainer.style.left = Math.random() * window.innerWidth + "px";
+  emojiContainer.style.top = Math.random() * window.innerHeight + "px";
+
+  emojiContainer.style.setProperty("--tx", ((Math.random() - 0.5) * 400) + "px");
+  emojiContainer.style.setProperty("--ty", ((Math.random() - 0.5) * 400) + "px");
+
+  emojiContainer.style.setProperty("--size", (30 + Math.random() * 40) + "px");
+  emojiContainer.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+  document.body.appendChild(emojiContainer);
+
+  setTimeout(() => emojiContainer.remove(), 12000);
+}
+
+function startIntenseSpawn() {
+  for (let i = 0; i < 6; i++) spawnEmoji();
+  setInterval(spawnEmoji, 600);
+}
+
+window.addEventListener('load', startIntenseSpawn);
 </script>
 
 </body>
